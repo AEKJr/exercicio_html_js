@@ -1,9 +1,9 @@
-const form = document.getElementById('verifica-num')
+const form = document.getElementById('verifica-num');
 
 function VerificaNum() {
-    let valorA = document.getElementById('valor-a');
-    let valorB = document.getElementById('valor-b');
-    return valorA.value > valorB.value;
+    let valorA = parseInt(document.getElementById('valor-a').value);
+    let valorB = parseInt(document.getElementById('valor-b').value);
+    return valorA > valorB;
 }
 
 form.addEventListener('submit', function(e) {
@@ -11,25 +11,35 @@ form.addEventListener('submit', function(e) {
     e.preventDefault();
 
     const valorMaior = document.getElementById('valor-a');
-    const valA = document.getElementById('valor-a');
-    const valB = document.getElementById('valor-b');
-    const mensagemSucesso = `O valor A: <b>${valA.value}</b> é maior que o valor de B: <b>${valB.value}</b>`;
-    const mensagemFalha = `O valor B: <b>${valB.value}</b> é maior que o valor de A: <b>${valA.value}</b>, tente outro número.`;
+    var valA = document.getElementById('valor-a');
+    var valB = document.getElementById('valor-b');
+    var mensagemSucesso = `O valor A: <b>${valA.value}</b> é maior que o valor de B: <b>${valB.value}</b>`;
+    var mensagemFalha = `O valor B: <b>${valB.value}</b> é maior que o valor de A: <b>${valA.value}</b>, tente outro número.`;
     
     formValido = VerificaNum(valorMaior.value)
     if (formValido) {
-        const containerMensagemSucesso = document.querySelector('.success-message');
+        var containerMensagemSucesso = document.querySelector('.success-message');
         containerMensagemSucesso.innerHTML = mensagemSucesso;
         containerMensagemSucesso.style.display = 'inline-block';
+        var containerMensagemFalha = document.querySelector('.fail-message');
+        containerMensagemFalha.innerHTML = mensagemFalha;
+        containerMensagemFalha.style.display = 'none';
+        
 
         valA.value = '';
         valB.value = '';
+        
 
     } else {
-        const containerMensagemSucesso = document.querySelector('.fail-message');
-        containerMensagemSucesso.innerHTML = mensagemFalha;
-        containerMensagemSucesso.style.display = 'inline-block';
+        var containerMensagemFalha = document.querySelector('.fail-message');
+        containerMensagemFalha.innerHTML = mensagemFalha;
+        containerMensagemFalha.style.display = 'inline-block';
+        var containerMensagemSucesso = document.querySelector('.success-message');
+        containerMensagemSucesso.innerHTML = mensagemSucesso;
+        containerMensagemSucesso.style.display = 'none';
+
+        valA.value = '';
+        valB.value = '';
+        
     }
 })
-
-console.log(form);
